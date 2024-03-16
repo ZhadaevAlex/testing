@@ -5,7 +5,6 @@ import com.gridnine.testing.entity.Segment;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -21,7 +20,6 @@ public class RulesBuilder {
                         .anyMatch(segment -> segment.getArrivalDate().isBefore(segment.getDepartureDate())),
 
                 flight -> {
-                    int hoursOnLandMax = MAX_HOURS;
                     List<Segment> segments = flight.getSegments();
                     Segment segmentPrev = null;
                     Duration landTimeSum = Duration.ZERO;
@@ -33,7 +31,7 @@ public class RulesBuilder {
                         segmentPrev = segment;
                     }
 
-                    return landTimeSum.toHours() > hoursOnLandMax;
+                    return landTimeSum.toHours() > MAX_HOURS;
                 });
     }
 }
