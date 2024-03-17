@@ -1,6 +1,7 @@
 package com.gridnine.testing.entity;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Flight {
@@ -18,5 +19,18 @@ public class Flight {
     public String toString() {
         return segments.stream().map(Object::toString)
                 .collect(Collectors.joining(" "));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flight flight = (Flight) o;
+        return segments.equals(flight.segments);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(segments);
     }
 }
